@@ -6,8 +6,30 @@ import { useRouter } from "next/navigation";
 // Extend the Window interface to recognize Razorpay
 declare global {
   interface Window {
-    Razorpay: any;
+    Razorpay: {
+      new (options: RazorpayOptions): RazorpayInstance;
+    };
   }
+}
+
+interface RazorpayOptions {
+  key: string;
+  amount: number;
+  currency: string;
+  name: string;
+  description: string;
+  order_id: string;
+  handler: (response: RazorpayResponse) => void;
+  prefill: {
+    name: string;
+    email: string;
+    contact: string;
+  };
+  theme: { color: string };
+}
+
+interface RazorpayInstance {
+  open: () => void;
 }
 
 interface RazorpayResponse {
