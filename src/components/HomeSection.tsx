@@ -81,7 +81,7 @@ export const HomeSection = () => {
   return (
     <section
       id="home"
-      className={`p-4 sm:p-10 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white rounded-xl shadow-lg mt-14 ${
+      className={`p-4 sm:p-5 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white rounded-xl shadow-lg mt-14 ${
         isOpen ? "overflow-hidden h-screen" : ""
       }`}
     >

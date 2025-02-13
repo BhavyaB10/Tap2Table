@@ -1,7 +1,7 @@
 export const plans = [
   {
-    duration: "3 Months",
-    price: "₹2,499",
+    duration: "1 Months",
+    price: "₹1,499",
     features: [
       "QR Code Ordering",
       "Menu Management",
@@ -14,7 +14,7 @@ export const plans = [
   },
   {
     duration: "6 Months",
-    price: "₹4,499",
+    price: "₹5,499",
     features: [
       "QR Code Ordering",
       "Menu Management",
@@ -26,8 +26,8 @@ export const plans = [
     highlight: true, // Highlight the most value-packed plan
   },
   {
-    duration: "12 Months",
-    price: "₹9,999",
+    duration: "3 Months",
+    price: "₹2,999",
     features: [
       "QR Code Ordering",
       "Menu Management",
