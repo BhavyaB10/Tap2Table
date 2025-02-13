@@ -1,9 +1,9 @@
-import admin from "../admin.webp";
-import qrbasedOrdering from "../qr_based_menu.jpg";
-import dashBoardAnalytics from "../Web-analytics-dashboard.webp";
-import contactlessdinning from "../contactlessdinning.avif";
-import seamlessoder from "../food-ordering-system-semless.png";
-import orderstatus from "../order status.webp";
+import admin from "@/images/admin.webp";
+import qrbasedOrdering from "@/images/qr_based_menu.jpg";
+import dashBoardAnalytics from "@/images/Web-analytics-dashboard.webp";
+import contactlessdinning from "@/images/contactlessdinning.avif";
+import seamlessoder from "@/images/food-ordering-system-semless.png";
+import orderstatus from "@/images/order status.webp";
 export const services = [
   {
     title: "QR-based digital menu",

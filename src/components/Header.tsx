@@ -5,7 +5,7 @@ import { BiMenu, BiX } from "react-icons/bi";
 import { Link as ScrollLink } from "react-scroll";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import logo2 from "../logo2.png";
+import logo2 from "@/images/Logo Sample 4.jpg.png";
 import { headerItems } from "@/constants/constants";
 
 export const Header: React.FC = () => {

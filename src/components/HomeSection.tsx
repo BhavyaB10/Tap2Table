@@ -15,10 +15,10 @@ import data from "../data/data.json";
 import Image from "next/image";
 import { useState } from "react";
 
-import home1 from "../home1.webp";
-import home2 from "../home2.webp";
-import home3 from "../home3.webp";
-import home4 from "../home4.webp";
+import home1 from "@/images/home1.webp";
+import home2 from "@/images/home2.webp";
+import home3 from "@/images/home3.webp";
+import home4 from "@/images/home4.webp";
 
 const imageList = [
   { src: home1, alt: "QR Ordering 1" },
