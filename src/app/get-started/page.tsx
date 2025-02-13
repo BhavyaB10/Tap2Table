@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 // Extend the Window interface to recognize Razorpay
 declare global {
@@ -39,13 +40,15 @@ interface RazorpayResponse {
 }
 
 const GetStarted = () => {
+  const searchParams = useSearchParams();
+  const amount = searchParams ? searchParams.get("amount") || "4999" : "4999"; // Default amount if not provided
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     restaurant: "",
     address: "",
-    amount: "4999", // Default pricing amount
+    amount, // Default pricing amount
   });
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -107,64 +110,53 @@ const GetStarted = () => {
 
   return (
     <motion.div
-      className="min-h-screen flex items-center justify-center bg-gray-900 text-white p-6"
+      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800 p-6"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold text-center mb-4">
+      <motion.div
+        className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-xl w-full max-w-md border border-white/20"
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h2 className="text-2xl font-bold text-center text-white mb-4">
           Complete Your Subscription
         </h2>
         <form className="space-y-4">
-          <input
-            type="text"
-            placeholder="Full Name"
-            className="w-full p-3 bg-gray-700 rounded-lg"
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            className="w-full p-3 bg-gray-700 rounded-lg"
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
-          />
-          <input
-            type="tel"
-            placeholder="Phone Number"
-            className="w-full p-3 bg-gray-700 rounded-lg"
-            onChange={(e) =>
-              setFormData({ ...formData, phone: e.target.value })
-            }
-          />
-          <input
-            type="text"
-            placeholder="Restaurant Name"
-            className="w-full p-3 bg-gray-700 rounded-lg"
-            onChange={(e) =>
-              setFormData({ ...formData, restaurant: e.target.value })
-            }
-          />
-          <input
-            type="text"
-            placeholder="Address"
-            className="w-full p-3 bg-gray-700 rounded-lg"
-            onChange={(e) =>
-              setFormData({ ...formData, address: e.target.value })
-            }
-          />
-          <button
+          {[
+            { placeholder: "Full Name", key: "name" },
+            { placeholder: "Email", key: "email", type: "email" },
+            { placeholder: "Phone Number", key: "phone", type: "tel" },
+            { placeholder: "Restaurant Name", key: "restaurant" },
+            { placeholder: "Address", key: "address" },
+          ].map(({ placeholder, key, type = "text" }) => (
+            <motion.input
+              key={key}
+              type={type}
+              placeholder={placeholder}
+              className="w-full p-3 bg-white/20 text-white rounded-lg placeholder-gray-300 focus:ring-2 focus:ring-blue-400 outline-none"
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, [key]: e.target.value }))
+              }
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
+            />
+          ))}
+          <motion.button
             type="button"
-            className="w-full py-3 bg-blue-500 rounded-lg font-semibold hover:bg-blue-600 transition-all"
+            className="w-full py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-all"
             onClick={handlePayment}
             disabled={loading}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            {loading ? "Processing..." : "Proceed to Pay ₹4999"}
-          </button>
+            {loading ? "Processing..." : `Proceed to Pay ${formData.amount}`}
+          </motion.button>
         </form>
-      </div>
+      </motion.div>
     </motion.div>
   );
 };

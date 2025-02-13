@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { plans } from "@/priceplans/plans";
+import Link from "next/link";
 
 export const PricingSection = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,12 +55,11 @@ export const PricingSection = () => {
                   </li>
                 ))}
               </ul>
-              <button
-                onClick={() => setIsOpen(true)}
-                className="mt-6 w-full py-2 bg-yellow-300 text-gray-900 font-bold rounded-lg hover:bg-yellow-400 transition"
-              >
-                Get Started
-              </button>
+              <Link href={`/get-started?amount=${plan.price}`} passHref>
+                <button className="mt-6 w-full py-2 bg-yellow-300 text-gray-900 font-bold rounded-lg hover:bg-yellow-400 transition">
+                  Get Started
+                </button>
+              </Link>
             </motion.div>
           ))}
         </div>
