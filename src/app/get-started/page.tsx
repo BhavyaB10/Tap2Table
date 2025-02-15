@@ -261,6 +261,10 @@ const GetStartedContent = () => {
   }, []);
 
   const handlePayment = async () => {
+    if (!razorpayLoaded) {
+      alert("Razorpay SDK is still loading. Please wait.");
+      return;
+    }
     setLoading(true);
     try {
       const res = await fetch("/api/razorpay", {
