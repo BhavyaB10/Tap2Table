@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { services } from "@/ourservices/services";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
@@ -12,14 +12,6 @@ export const ServicesSection = () => {
     img: string;
   } | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000); // Auto move every 5 seconds
-
-    return () => clearInterval(interval);
-  }, [currentIndex]);
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % services.length);
@@ -40,82 +32,37 @@ export const ServicesSection = () => {
         Our Services
       </h2>
       {/* Services Carousel */}
-      <div className="relative flex items-center justify-center max-w-full mx-auto overflow-hidden">
+      <div className="relative flex items-center justify-center max-w-4xl mx-auto">
         <button
-          className="absolute left-2 md:left-4 text-white bg-white/20 p-1.5 md:p-2 rounded-full hover:bg-white/30 transition z-10"
+          className="absolute left-0 text-white bg-white/20 p-2 rounded-full hover:bg-white/30 transition"
           onClick={prevSlide}
         >
-          <FaArrowLeft size={14} className="md:size-16" />
+          <FaArrowLeft size={24} />
         </button>
-        <div className="flex items-center space-x-6 w-full justify-center overflow-hidden">
-          <motion.div
-            className="p-4 bg-white/10 backdrop-blur-md rounded-lg shadow-lg w-32 md:w-40 opacity-60 border border-white/20 hidden md:block"
-            initial={{ scale: 0.9, opacity: 0.5 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
-          >
-            <Image
-              src={
-                services[(currentIndex - 1 + services.length) % services.length]
-                  .img
-              }
-              alt={
-                services[(currentIndex - 1 + services.length) % services.length]
-                  .title
-              }
-              width={100}
-              height={140}
-              className="mx-auto mb-2 rounded-lg shadow-md"
-            />
-            <p className="text-xs md:text-sm font-semibold text-gray-200 text-center">
-              {
-                services[(currentIndex - 1 + services.length) % services.length]
-                  .title
-              }
-            </p>
-          </motion.div>
-          <motion.div
-            key={services[currentIndex].title}
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="flex flex-col items-center p-6 bg-white/10 backdrop-blur-md rounded-lg shadow-lg w-72 md:w-80 border border-white/20"
-            onClick={() => setSelectedService(services[currentIndex])}
-          >
-            <Image
-              src={services[currentIndex].img}
-              alt={services[currentIndex].title}
-              width={200}
-              height={280}
-              className="mx-auto mb-4 rounded-lg shadow-md"
-            />
-            <p className="text-lg md:text-xl font-semibold text-gray-200 text-center">
-              {services[currentIndex].title}
-            </p>
-          </motion.div>
-          <motion.div
-            className="p-4 bg-white/10 backdrop-blur-md rounded-lg shadow-lg w-32 md:w-40 opacity-60 border border-white/20 hidden md:block"
-            initial={{ scale: 0.9, opacity: 0.5 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
-          >
-            <Image
-              src={services[(currentIndex + 1) % services.length].img}
-              alt={services[(currentIndex + 1) % services.length].title}
-              width={100}
-              height={140}
-              className="mx-auto mb-2 rounded-lg shadow-md"
-            />
-            <p className="text-xs md:text-sm font-semibold text-gray-200 text-center">
-              {services[(currentIndex + 1) % services.length].title}
-            </p>
-          </motion.div>
-        </div>
+        <motion.div
+          key={currentIndex}
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col items-center p-6 bg-white/10 backdrop-blur-md rounded-lg shadow-lg w-80 border border-white/20"
+          onClick={() => setSelectedService(services[currentIndex])}
+        >
+          <Image
+            src={services[currentIndex].img}
+            alt={services[currentIndex].title}
+            width={220}
+            height={320}
+            className="mx-auto mb-4 rounded-lg shadow-md"
+          />
+          <p className="text-xl font-semibold text-gray-200 text-center">
+            {services[currentIndex].title}
+          </p>
+        </motion.div>
         <button
-          className="absolute right-2 md:right-4 text-white bg-white/20 p-1.5 md:p-2 rounded-full hover:bg-white/30 transition z-10"
+          className="absolute right-0 text-white bg-white/20 p-2 rounded-full hover:bg-white/30 transition"
           onClick={nextSlide}
         >
-          <FaArrowRight size={14} className="md:size-16" />
+          <FaArrowRight size={24} />
         </button>
       </div>
 

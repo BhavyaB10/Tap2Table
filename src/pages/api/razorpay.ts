@@ -1,7 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import Razorpay from "razorpay";
-import shortid from "shortid";
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -18,14 +16,15 @@ export default async function handler(
     }
 
     const razorpay = new Razorpay({
-      key_id: process.env.RAZORPAY_KEY_ID as string,
-      key_secret: process.env.RAZORPAY_KEY_SECRET as string,
+      key_id: process.env.RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_KEY_SECRET,
     });
 
     const options = {
       amount: parseInt(amount) * 100, // Convert amount to paisa
       currency: "INR",
-      receipt: shortid.generate(),
+      receipt: `receipt_${Date.now()}`,
+      payment_capture: 1,
     };
 
     const order = await razorpay.orders.create(options);
