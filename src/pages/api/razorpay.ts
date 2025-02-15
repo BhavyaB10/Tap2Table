@@ -16,14 +16,14 @@ export default async function handler(
     }
 
     const razorpay = new Razorpay({
-      key_id: process.env.RAZORPAY_KEY_ID,
-      key_secret: process.env.RAZORPAY_KEY_SECRET,
+      key_id: process.env.RAZORPAY_KEY_ID!,
+      key_secret: process.env.RAZORPAY_KEY_SECRET!,
     });
 
     const options = {
-      amount: parseInt(amount) * 100, // Convert amount to paisa
+      amount: parseInt(amount) * 100, // Convert to paise
       currency: "INR",
-      receipt: `receipt_${Date.now()}`,
+      receipt: `receipt_${Math.floor(Math.random() * 1000000)}`,
       payment_capture: 1,
     };
 
