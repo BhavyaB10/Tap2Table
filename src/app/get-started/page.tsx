@@ -252,8 +252,26 @@ const GetStartedContent = () => {
   const router = useRouter();
 
   useEffect(() => {
+    const loadRazorpay = () => {
+      if (
+        document.querySelector(
+          'script[src="https://checkout.razorpay.com/v1/checkout.js"]'
+        )
+      ) {
+        console.log("Razorpay SDK already loaded");
+        return;
+      }
+
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.async = true;
+      script.onload = () => console.log("Razorpay SDK loaded");
+      script.onerror = () => console.error("Failed to load Razorpay SDK");
+      document.body.appendChild(script);
+    };
+
     if (typeof window !== "undefined" && !window.Razorpay) {
-      console.warn("Razorpay SDK not loaded!");
+      loadRazorpay();
     }
   }, []);
 
